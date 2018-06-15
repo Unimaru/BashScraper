@@ -1,6 +1,5 @@
 package pl.tb.extraction;
 
-public interface Extractor {
-
-
+public interface Extractor<T> {
+    T extractDataFrom();
 }
