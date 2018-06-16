@@ -1,11 +1,12 @@
 package pl.tb.extraction;
 
-import java.io.IOException;
+import java.util.List;
 
 public class ExtractService {
 
-    public void extractData() throws IOException {
+    public List<WebData> extractData() {
         Extractor webExtractor = new WebExtractor();
-        webExtractor.extractDataFrom();
+        DocumentRetriever documentRetriever = new URLDocumentRetriever();
+        return (List<WebData>) webExtractor.extractDataFrom(documentRetriever, "http://bash.org.pl/latest/");
     }
 }

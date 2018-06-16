@@ -1,5 +1,7 @@
 package pl.tb.extraction;
 
+import org.jsoup.nodes.Document;
+
 public interface Extractor<T> {
-    T extractDataFrom();
+    T extractDataFrom(DocumentRetriever documentRetriever, String request);
 }
