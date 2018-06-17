@@ -6,25 +6,24 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class WebExtractorTest {
 
     WebExtractor instance;
-    MockDocumentRetriever mockDocumentRetriever;
 
     @Before
     public void setUp() {
         instance = new WebExtractor();
-        mockDocumentRetriever = new MockDocumentRetriever();
     }
 
     @Test
-    public void assertIfAllPagesAreLoaded() {
+    public void assertIfAllPagesAreExtractedCorrectly() {
         //given
         List<WebData> mockData = createMockDataForAllPages();
+        List<Page> pages = MockPageChooser.obtainAllPages();
         //when
-        List<WebData> webData = instance.extractDataFrom(mockDocumentRetriever, "test/");
+        List<WebData> webData = instance.extractDataFrom(pages);
         //then
         assertEquals(mockData, webData);
     }

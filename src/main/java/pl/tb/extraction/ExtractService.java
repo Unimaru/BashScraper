@@ -4,9 +4,8 @@ import java.util.List;
 
 public class ExtractService {
 
-    public List<WebData> extractData() {
-        Extractor webExtractor = new WebExtractor();
-        DocumentRetriever documentRetriever = new URLDocumentRetriever();
-        return (List<WebData>) webExtractor.extractDataFrom(documentRetriever, "http://bash.org.pl/latest/");
+    public List<WebData> extractData(Long pageLimit) {
+        List<Page> pages = new WebPageLoader().loadPagesLimitedTo(pageLimit, new WebReceiver("http://bash.org.pl/latest/"));
+        return new WebExtractor().extractDataFrom(pages);
     }
 }

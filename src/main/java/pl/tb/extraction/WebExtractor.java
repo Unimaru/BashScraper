@@ -12,14 +12,11 @@ import java.util.List;
 public class WebExtractor implements Extractor<List<WebData>> {
 
     @Override
-    public List<WebData> extractDataFrom(DocumentRetriever documentRetriever, String request) {
+    public List<WebData> extractDataFrom(List<Page> pageList) {
         List<WebData> result = new ArrayList<>();
-        DocumentData document = documentRetriever.retrieveDocumentDataFrom(request);
-        do {
-            result.addAll(extract(document.getDocument()));
-            document = documentRetriever.retrieveDocumentDataFrom(document.getNextPageRequest());
-        } while (document.getHasNextPage());
-        result.addAll(extract(document.getDocument()));
+        pageList.stream().forEach(page -> {
+            result.addAll(extract(page.getContent()));
+        });
         return result;
     }
 
