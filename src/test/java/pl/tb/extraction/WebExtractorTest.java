@@ -2,6 +2,7 @@ package pl.tb.extraction;
 
 import org.junit.Before;
 import org.junit.Test;
+import pl.tb.statistics.StatisticsService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class WebExtractorTest {
 
     @Before
     public void setUp() {
-        instance = new WebExtractor();
+        instance = new WebExtractor(new StatisticsService());
     }
 
     @Test

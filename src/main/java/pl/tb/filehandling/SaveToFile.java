@@ -15,7 +15,6 @@ public class SaveToFile {
 
 
     public void save(List<WebData> webData) {
-
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             objectMapper.writeValue(new File(configProvider.getPathFromConfig()), webData);
