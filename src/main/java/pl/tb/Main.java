@@ -1,7 +1,5 @@
 package pl.tb;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import org.apache.commons.cli.*;
 import pl.tb.extraction.ExtractService;
 import pl.tb.extraction.WebData;
@@ -11,8 +9,18 @@ import java.util.List;
 
 public class Main {
 
+//    private static final Logger logger = LogManager.getLogger("Main");
+
     public static void main(String[] args) throws ParseException {
 
+        Long limit = createLimitFromCLI(args);
+
+        ExtractService extractService = new ExtractService();
+        List<WebData> webData = extractService.extractData(limit);
+        new SaveToFile().save(webData);
+    }
+
+    private static Long createLimitFromCLI(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption(new Option("p", true, "Number of pages"));
         Long value = null;
@@ -22,12 +30,7 @@ public class Main {
 
         if (commandLine.hasOption("p")) {
             value = Long.valueOf(commandLine.getOptionValue("p"));
-        } else {
-            System.out.println("NO pages");
         }
-
-        ExtractService extractService = new ExtractService();
-        List<WebData> webData = extractService.extractData(value);
-        new SaveToFile().save(webData);
+        return value;
     }
 }

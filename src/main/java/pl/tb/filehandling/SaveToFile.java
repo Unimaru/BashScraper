@@ -1,6 +1,7 @@
 package pl.tb.filehandling;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import pl.tb.configuration.ConfigProvider;
 import pl.tb.extraction.WebData;
 
 import java.io.File;
@@ -9,11 +10,15 @@ import java.util.List;
 
 public class SaveToFile {
 
-    public void save(List<WebData> webData){
+
+    ConfigProvider configProvider = new ConfigProvider();
+
+
+    public void save(List<WebData> webData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(new File("file.txt"), webData);
+            objectMapper.writeValue(new File(configProvider.getPathFromConfig()), webData);
         } catch (IOException e) {
             e.printStackTrace();
         }
