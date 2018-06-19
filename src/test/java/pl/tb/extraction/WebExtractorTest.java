@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.tb.statistics.StatisticsService;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,17 @@ public class WebExtractorTest {
         //given
         List<WebData> mockData = createMockDataForAllPages();
         List<Page> pages = MockPageChooser.obtainAllPages();
+        //when
+        List<WebData> webData = instance.extractDataFrom(pages);
+        //then
+        assertEquals(mockData, webData);
+    }
+
+    @Test
+    public void testIfThereIsNoPagesToExtract() {
+        //given
+        List<WebData> mockData = new ArrayList<>();
+        List<Page> pages = new ArrayList<>();
         //when
         List<WebData> webData = instance.extractDataFrom(pages);
         //then

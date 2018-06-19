@@ -5,9 +5,14 @@ import java.util.List;
 
 public class WebPageLoader implements PageLoader {
 
+    private final Receiver receiver;
+
+    public WebPageLoader(Receiver receiver) {
+        this.receiver = receiver;
+    }
 
     @Override
-    public List<Page> loadPagesLimitedTo(Long limit, Receiver receiver) {
+    public List<Page> loadPagesLimitedTo(Long limit) {
 
         List<Page> pages = new ArrayList<>();
         String request = receiver.getRequest();

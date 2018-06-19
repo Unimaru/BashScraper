@@ -1,6 +1,5 @@
 package pl.tb.extraction;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class MockReceiver extends Receiver {

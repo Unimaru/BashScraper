@@ -5,13 +5,11 @@ import org.jsoup.select.Elements;
 import pl.tb.statistics.StatisticsData;
 import pl.tb.statistics.StatisticsService;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class WebExtractor implements Extractor<List<WebData>> {
+public class WebExtractor implements Extractor {
 
     StatisticsService statisticsService;
 

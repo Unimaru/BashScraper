@@ -8,11 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class SaveToFile {
+public class JSONDataWriter implements DataWriter {
 
 
-    ConfigProvider configProvider = new ConfigProvider();
+    ConfigProvider configProvider;
 
+    public JSONDataWriter(ConfigProvider configProvider) {
+        this.configProvider = configProvider;
+    }
 
     public void save(List<WebData> webData) {
         ObjectMapper objectMapper = new ObjectMapper();

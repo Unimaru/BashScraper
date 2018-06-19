@@ -12,21 +12,20 @@ import static org.junit.Assert.assertEquals;
 public class WebPageLoaderTest {
 
     private PageLoader instance;
-    private Receiver receiver;
+    private String request;
 
     @Before
     public void setUp() {
-        instance = new WebPageLoader();
+        request = "test/";
+        instance = new WebPageLoader(new MockReceiver(request));
     }
 
     @Test
     public void downloadPagesWithLimitSetOnOne() {
         //given
-        String request = "test/";
-        receiver = new MockReceiver(request);
         List<Page> expectedPages = Arrays.asList(MockPageChooser.choosePage(request));
         //when
-        List<Page> pages = instance.loadPagesLimitedTo(1L, receiver);
+        List<Page> pages = instance.loadPagesLimitedTo(1L);
         //then
         assertIsNumberOfPagesCorrect(1L, Long.valueOf(pages.size()));
         assertIfPagesContentIsCorrect(expectedPages, pages);
@@ -35,13 +34,10 @@ public class WebPageLoaderTest {
     @Test
     public void downloadPagesWithLimitSetOnMaxCountOfPages() {
         //given
-        String request = "test/";
-        receiver = new MockReceiver(request);
         List<Page> expectedPages = MockPageChooser.obtainAllPages();
-        ;
         Long limit = 3L;
         //when
-        List<Page> pages = instance.loadPagesLimitedTo(limit, receiver);
+        List<Page> pages = instance.loadPagesLimitedTo(limit);
         //then
         assertIsNumberOfPagesCorrect(limit, Long.valueOf(pages.size()));
         assertIfPagesContentIsCorrect(expectedPages, pages);
@@ -50,12 +46,10 @@ public class WebPageLoaderTest {
     @Test
     public void downloadPagesWithLimitBiggerThenNumberOfPages() {
         //given
-        String request = "test/";
-        receiver = new MockReceiver(request);
         List<Page> expectedPages = MockPageChooser.obtainAllPages();
         Long limit = 10L;
         //when
-        List<Page> pages = instance.loadPagesLimitedTo(limit, receiver);
+        List<Page> pages = instance.loadPagesLimitedTo(limit);
         //then
         assertIsNumberOfPagesCorrect(3L, Long.valueOf(pages.size()));
         assertIfPagesContentIsCorrect(expectedPages, pages);
@@ -64,12 +58,10 @@ public class WebPageLoaderTest {
     @Test
     public void downloadPageWithZeroLimit() {
         //given
-        String request = "test/";
-        receiver = new MockReceiver(request);
         List<Page> expectedPages = Arrays.asList();
         Long limit = 0L;
         //when
-        List<Page> pages = instance.loadPagesLimitedTo(limit, receiver);
+        List<Page> pages = instance.loadPagesLimitedTo(limit);
         //then
         assertIsNumberOfPagesCorrect(0L, Long.valueOf(pages.size()));
         assertIfPagesContentIsCorrect(expectedPages, pages);

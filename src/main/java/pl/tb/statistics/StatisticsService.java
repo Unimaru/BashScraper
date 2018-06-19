@@ -15,7 +15,13 @@ public class StatisticsService {
     public String getStatistics() {
         StatisticsCounter statisticsCounter = new StatisticsCounter();
         List<StatisticResult> results = statisticsCounter.getResults(namedStatistics.entrySet());
-        return results.toString();
+        return preparePrettyData(results);
+    }
+
+    private String preparePrettyData(List<StatisticResult> results) {
+        StringBuilder stringBuilder = new StringBuilder();
+        results.forEach(statisticResult -> stringBuilder.append("\n" + statisticResult.getName() + " was processed in average time of " + statisticResult.getAverageTime() + " ms."));
+        return stringBuilder.toString();
     }
 
 }
