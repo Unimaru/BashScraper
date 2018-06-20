@@ -20,7 +20,7 @@ public class WebExtractorTest {
     }
 
     @Test
-    public void assertIfAllPagesAreExtractedCorrectly() {
+    public void testIfAllPagesAreExtractedCorrectly() {
         //given
         List<WebData> mockData = createMockDataForAllPages();
         List<Page> pages = MockPageChooser.obtainAllPages();

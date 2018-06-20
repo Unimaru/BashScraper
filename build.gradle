@@ -20,3 +20,14 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+jar {
+    from {
+        (configurations.runtime).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes("Main-Class": "pl.tb.Main" )
+    }
+}

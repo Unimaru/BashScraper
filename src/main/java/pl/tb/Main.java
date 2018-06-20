@@ -32,15 +32,20 @@ public class Main {
     }
 
     private static Long createLimitFromCLI(String[] args) throws ParseException {
+        HelpFormatter formatter = new HelpFormatter();
         Options options = new Options();
         options.addOption(new Option("p", true, "Number of pages"));
         Long value = null;
+
+        formatter.printHelp("BashScraper", options);
 
         CommandLineParser commandLineParser = new DefaultParser();
         CommandLine commandLine = commandLineParser.parse(options, args);
 
         if (commandLine.hasOption("p")) {
             value = Long.valueOf(commandLine.getOptionValue("p"));
+        }else{
+            throw new RuntimeException("No limit parameter");
         }
         return value;
     }

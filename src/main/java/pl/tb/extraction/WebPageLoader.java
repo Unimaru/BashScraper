@@ -14,6 +14,8 @@ public class WebPageLoader implements PageLoader {
     @Override
     public List<Page> loadPagesLimitedTo(Long limit) {
 
+        checkLimit(limit);
+
         List<Page> pages = new ArrayList<>();
         String request = receiver.getRequest();
 
@@ -28,6 +30,12 @@ public class WebPageLoader implements PageLoader {
         }
 
         return pages;
+    }
+
+    private void checkLimit(Long limit) {
+        if (limit < 0) {
+            throw new IllegalArgumentException("Limit is smaller then 0");
+        }
     }
 
 }

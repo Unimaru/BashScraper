@@ -67,6 +67,15 @@ public class WebPageLoaderTest {
         assertIfPagesContentIsCorrect(expectedPages, pages);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void downloadPageWithLimitLesserThenZero() {
+        //given
+        Long limit = -1L;
+        //when
+        instance.loadPagesLimitedTo(limit);
+        //then
+    }
+
     private void assertIfPagesContentIsCorrect(List<Page> expectedPages, List<Page> pages) {
         assertArrayEquals(expectedPages.stream().map(data -> data.getContent().toString()).toArray()
                 , pages.stream().map(page -> page.getContent().toString()).toArray());
